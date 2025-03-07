@@ -9,7 +9,7 @@ const usuario = document.getElementById("usuario").value
 const pass = document.getElementById("pass").value
 
 if (usuario === "coder" && pass === "12345"){
-    window.location.href = "/entrega/productos.html"
+    window.location.href = "/Entrega_JavaScript/productos.html"
 
     } else {
         document.getElementById("error-box").style.display = "flex";
