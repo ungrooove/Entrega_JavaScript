@@ -1,19 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos</title>
     <link rel="stylesheet" href="/entrega/css/style.css">
 </head>
+
 <body>
+    <nav id="nav-bar">
+        <div class="button-container">
+            <button class="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" stroke-linejoin="round"
+                    stroke-linecap="round" viewBox="0 0 24 24" stroke-width="2" fill="none" stroke="currentColor"
+                    class="icon">
+                    <circle r="1" cy="21" cx="9"></circle>
+                    <circle r="1" cy="21" cx="20"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+            </button>
+            <div class="quantity-prod">
+                <p>0</p>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- -----------CARITO----------->
+    <div class="master-container" id="carrito-container" style="display: none;">
+        <div class="card cart">
+            <label class="title">Carrito</label>
+            <div class="products" id="productos-carrito">
+                
+                <!-- <div class="quantity">
+                    <button id="sumar">
+                        <svg fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b"
+                                d="M20 12L4 12"></path>
+                        </svg>
+                    </button>
+                    <label>2</label>
+                    <button id="restar">
+                        <svg fill="none" viewBox="0 0 24 24" height="14" width="14" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" stroke="#47484b"
+                                d="M12 4V20M20 12H4"></path>
+                        </svg>
+                    </button>
+                </div> -->
+
+            </div>
+        </div>
+        <div class="card checkout">
+            <label class="title">Checkout</label>
+            <div class="details">
+                <span>Subtotal:</span>
+                <span id="subtotal">0$</span>
+                <span>Envio:</span>
+                <span>4.000$</span>
+            </div>
+            <div class="checkout--footer">
+                <label class="price"><sup>$</sup><span id="total">4.000</span></label>
+                <button class="checkout-btn">Checkout</button>
+            </div>
+        </div>
+    </div>
     <main>
         <div class="seccion-prod">
             <div id="productos-container" class="productos-container">
-
             </div>
         </div>
     </main>
     <script src="/entrega/js/productos.js"></script>
 </body>
+
 </html>
