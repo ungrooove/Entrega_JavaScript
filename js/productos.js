@@ -47,8 +47,8 @@ function mostrarProductos(el) {
     boton.innerText = "Comprar";
     boton.className = "button-prod"
 
-    boton.addEventListener("click", () => {
-        agregarAlCarrito(el);
+    boton.addEventListener("click", (e) => {
+        agregarAlCarrito(el, e.currentTarget);
     });
 
     card.appendChild(imagen);
@@ -88,20 +88,42 @@ botonCarrito.addEventListener("click", () => {
 });
 
 
-function agregarAlCarrito(producto) {
+function agregarAlCarrito(producto, boton) {
     let productoEnCarrito = carrito.find((prod) => prod.id === producto.id);
 
     if(productoEnCarrito){
-        productoEnCarrito = (productoEnCarrito.cantidad || 1) + 1;
-    }
-    else{
+        productoEnCarrito.cantidad = (productoEnCarrito.cantidad || 1) + 1;
+
+        // Ya estaba en el carrito
+        Toastify({
+            text: "Unidad agregada",
+            className: "info",
+            backgroundColor: "#ffcc00",
+            duration: 3000,
+            close: true,
+            gravity: "top", 
+            position: "left",
+        }).showToast();
+    } else {
         carrito.push({...producto, cantidad: 1});
+
+        // Primera vez que se agrega
+        Toastify({
+            text: "Producto agregado al carrito",
+            className: "info",
+            duration: 3000,
+            close: true,
+            gravity: "top", 
+            position: "left",
+        }).showToast();
     }
-    
+
     contadorCarrito();
     mostrarCarrito();
     guardarCarrito();
 }
+
+
 
 
 function mostrarCarrito(){
@@ -183,3 +205,43 @@ function modificarCantidad(id, cambio) {
 }
 
 cargarCarrito();
+
+// VACIAR CARRITO
+document.getElementById("vaciar-carrito").addEventListener("click", () => {
+    carrito = [];
+    guardarCarrito();
+    mostrarCarrito();
+    contadorCarrito();
+
+    Toastify({
+        text: "Carrito vaciado",
+        backgroundColor: "red",
+        duration: 3000,
+        gravity: "top",
+        position: "left",
+        close: true
+    }).showToast();
+});
+
+// COMPRA EXITOSA
+const checkoutBtn = document.querySelector(".checkout-btn");
+let tooltipMostrado = false;
+
+checkoutBtn.addEventListener("click", () => {
+    if (tooltipMostrado) return;
+    if (carrito.length === 0) return;
+    tippy(checkoutBtn, {
+        content: '¡Compra exitosa!',
+        trigger: 'manual',
+        placement: 'bottom',
+        onHidden(instance) {
+            instance.destroy();
+        }
+    }).show();
+
+    tooltipMostrado = true;
+    carrito = [];
+    guardarCarrito();
+    mostrarCarrito();
+    contadorCarrito();
+});
